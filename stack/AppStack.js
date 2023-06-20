@@ -3,11 +3,11 @@ import { createMaterialBottomTabNavigator } from "@react-navigation/material-bot
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { theme } from "../src/core/theme";
+import { MD3Colors } from "react-native-paper";
 // Screens
 import Home from "../screens/navigator/Home";
 import Search from "../screens/navigator/Search";
 import Profile from "../screens/navigator/Profile";
-import { MD3Colors } from "react-native-paper";
 
 // Main Stack
 const App = createMaterialBottomTabNavigator();

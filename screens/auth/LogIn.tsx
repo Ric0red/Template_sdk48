@@ -11,7 +11,7 @@ import { emailValidator, passwordValidator } from "../../src/core/utils";
 import { Navigation } from "../../src/types";
 
 type Props = {
-  navigation: Navigation,
+  navigation: Navigation;
 };
 
 const LoginScreen = ({ navigation }: Props) => {
@@ -76,7 +76,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
       <View style={styles.row}>
         <Text style={styles.label}>Don’t have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate("RegisterScreen")}>
+        <TouchableOpacity onPress={() => navigation.navigate("SignIn")}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>

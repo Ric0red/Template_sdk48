@@ -6,6 +6,7 @@ import { useUserAuth } from "../context/UserAuthContext";
 // import screens
 import AppStack from "./AppStack";
 import AuthStack from "./AuthStack";
+import { theme } from "../src/core/theme";
 // navigator options
 const Options = { headerShown: false };
 
@@ -13,9 +14,9 @@ const Main = createNativeStackNavigator();
 
 const MainStack = () => {
   const [loading, setLoading] = React.useState(true);
-  const [user, setUser] = React.useState(true);
+
   // user context -- NOTA: evaluar el usuario logeado con types
-  //const { user } = useUserAuth;
+  const { user } = useUserAuth;
 
   if (loading) {
     setTimeout(() => {
@@ -23,7 +24,7 @@ const MainStack = () => {
     }, 1500);
     return (
       <View style={styles.container}>
-        <ActivityIndicator size={"large"} color={"purple"} />
+        <ActivityIndicator size={"large"} color={theme.colors.primary} />
       </View>
     );
   }
@@ -33,17 +34,6 @@ const MainStack = () => {
       <Main.Navigator screenOptions={Options}>
         <Main.Screen name="App" component={AppStack} />
       </Main.Navigator>
-    );
-  }
-
-  if (loading) {
-    setTimeout(() => {
-      setLoading(false);
-    }, 1500);
-    return (
-      <View style={styles.container}>
-        <ActivityIndicator size={"large"} color={"purple"} />
-      </View>
     );
   }
 

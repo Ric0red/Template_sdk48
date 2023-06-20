@@ -1,27 +1,29 @@
-import React, { memo, useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import Background from '../components/Background';
-import Logo from '../components/Logo';
-import Header from '../components/Header';
-import Button from '../components/Button';
-import TextInput from '../components/TextInput';
-import BackButton from '../components/BackButton';
-import { theme } from '../core/theme';
-import { Navigation } from '../types';
+import React, { memo, useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import Background from "../../src/components/Background";
+import Logo from "../../src/components/Logo";
+import Header from "../../src/components/Header";
+import Button from "../../src/components/Button";
+import TextInput from "../../src/components/TextInput";
+import BackButton from "../../src/components/BackButton";
+import { theme } from "../../src/core/theme";
+import { Navigation } from "../../src/types";
 import {
   emailValidator,
   passwordValidator,
   nameValidator,
-} from '../core/utils';
+} from "../../src/core/utils";
+import { useUserAuth } from "../../context/UserAuthContext";
 
 type Props = {
   navigation: Navigation;
 };
 
 const RegisterScreen = ({ navigation }: Props) => {
-  const [name, setName] = useState({ value: '', error: '' });
-  const [email, setEmail] = useState({ value: '', error: '' });
-  const [password, setPassword] = useState({ value: '', error: '' });
+  const [name, setName] = useState({ value: "", error: "" });
+  const [email, setEmail] = useState({ value: "", error: "" });
+  const [password, setPassword] = useState({ value: "", error: "" });
+  const { user } = useUserAuth();
 
   const _onSignUpPressed = () => {
     const nameError = nameValidator(name.value);
@@ -35,12 +37,12 @@ const RegisterScreen = ({ navigation }: Props) => {
       return;
     }
 
-    navigation.navigate('Dashboard');
+    //navigation.navigate('Dashboard');
   };
 
   return (
     <Background>
-      <BackButton goBack={() => navigation.navigate('HomeScreen')} />
+      <BackButton goBack={() => navigation.navigate("SignIn")} />
 
       <Logo />
 
@@ -50,7 +52,7 @@ const RegisterScreen = ({ navigation }: Props) => {
         label="Name"
         returnKeyType="next"
         value={name.value}
-        onChangeText={text => setName({ value: text, error: '' })}
+        onChangeText={(text) => setName({ value: text, error: "" })}
         error={!!name.error}
         errorText={name.error}
       />
@@ -59,11 +61,11 @@ const RegisterScreen = ({ navigation }: Props) => {
         label="Email"
         returnKeyType="next"
         value={email.value}
-        onChangeText={text => setEmail({ value: text, error: '' })}
+        onChangeText={(text) => setEmail({ value: text, error: "" })}
         error={!!email.error}
         errorText={email.error}
         autoCapitalize="none"
-        autoCompleteType="email"
+        autoComplete="email"
         textContentType="emailAddress"
         keyboardType="email-address"
       />
@@ -72,7 +74,7 @@ const RegisterScreen = ({ navigation }: Props) => {
         label="Password"
         returnKeyType="done"
         value={password.value}
-        onChangeText={text => setPassword({ value: text, error: '' })}
+        onChangeText={(text) => setPassword({ value: text, error: "" })}
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
@@ -84,7 +86,7 @@ const RegisterScreen = ({ navigation }: Props) => {
 
       <View style={styles.row}>
         <Text style={styles.label}>Already have an account? </Text>
-        <TouchableOpacity onPress={() => navigation.navigate('LoginScreen')}>
+        <TouchableOpacity onPress={() => navigation.navigate("LogIn")}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
       </View>
@@ -100,11 +102,11 @@ const styles = StyleSheet.create({
     marginTop: 24,
   },
   row: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginTop: 4,
   },
   link: {
-    fontWeight: 'bold',
+    fontWeight: "bold",
     color: theme.colors.primary,
   },
 });
